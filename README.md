@@ -21,6 +21,30 @@ wandb login
 ```bash
 conda env config vars set HF_DATASETS_CACHE="/mnt/sh_flex_storage/projects/huggingface_home/datasets/"
 conda env config vars set HUGGINGFACE_HUB_CACHE="/mnt/sh_flex_storage/projects/huggingface_home/hub/"
+conda env config vars set HF_METRICS_CACHE="/mnt/sh_flex_storage/projects/huggingface_home/metrics/"
+conda env config vars set HF_EVALUATE_CACHE="/mnt/sh_flex_storage/projects/huggingface_home/evaluate/"
 # after re-activate:
 conda env config vars list
+```
+
+## try out finetuning
+```bash
+export CUDA_VISIBLE_DEVICES=0
+export TRANSFORMERS_OFFLINE=1
+# export HF_DATASETS_OFFLINE=1
+python finetune/finetune.py \
+  --model_path="bigcode/starcoderbase-7b" \
+  --dataset_name="enoreyes/success-llm-instructions"\
+  --size_valid_set 10000\
+  --seq_length 256 \
+  --max_steps 1000\
+  --batch_size 1\
+  --input_column_name="prompt"\
+  --output_column_name="completion"\
+  --gradient_accumulation_steps 2 \
+  --learning_rate 1e-4\
+  --lr_scheduler_type="cosine"\
+  --num_warmup_steps 100\
+  --weight_decay 0.05\
+  --output_dir="./checkpoints" \
 ```

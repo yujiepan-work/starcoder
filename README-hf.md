@@ -17,17 +17,22 @@ huggingface-cli login
 ```
 
 # Table of Contents
-1. [Quickstart](#quickstart)
-    - [Installation](#installation)
-    - [Code generation with StarCoder](#code-generation)
-    - [Text-generation-inference code](#text-generation-inference)
-2. [Fine-tuning](#fine-tuning)
-    - [Step by step installation with conda](#step-by-step-installation-with-conda)
-    - [Datasets](#datasets)
-      - [Stack Exchange](#stack-exchange-se)
-    - [Merging PEFT adapter layers](#merging-peft-adapter-layers)
-3. [Evaluation](#evaluation)
-4. [Inference hardware requirements](#inference-hardware-requirements)
+- [💫 StarCoder](#-starcoder)
+- [What is this about?](#what-is-this-about)
+- [News](#news)
+- [Disclaimer](#disclaimer)
+- [Table of Contents](#table-of-contents)
+- [Quickstart](#quickstart)
+  - [Installation](#installation)
+  - [Code generation](#code-generation)
+  - [Text-generation-inference](#text-generation-inference)
+- [Fine-tuning](#fine-tuning)
+  - [Step by step installation with conda](#step-by-step-installation-with-conda)
+  - [Datasets](#datasets)
+    - [Stack Exchange SE](#stack-exchange-se)
+  - [Merging PEFT adapter layers](#merging-peft-adapter-layers)
+- [Evaluation](#evaluation)
+- [Inference hardware requirements](#inference-hardware-requirements)
 
 # Quickstart
 StarCoder was trained on GitHub code, thus it can be used to perform code generation. More precisely, the model can complete the implementation of a function or infer the following characters in a line of code. This can be done with the help of the 🤗's [transformers](https://github.com/huggingface/transformers) library.
@@ -148,7 +153,7 @@ python finetune/finetune.py \
   --max_steps 1000\
   --batch_size 1\
   --input_column_name="question"\
-  --output_column_name="response"\ 
+  --output_column_name="response"\
   --gradient_accumulation_steps 16\
   --learning_rate 1e-4\
   --lr_scheduler_type="cosine"\
