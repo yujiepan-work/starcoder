@@ -207,7 +207,7 @@ def create_datasets(tokenizer, args):
         train_data = train_data.shuffle(buffer_size=args.shuffle_buffer, seed=args.seed)
     else:
         train_data = dataset['train']
-        valid_data = dataset['train']
+        valid_data = dataset['train'].select(range(2))
         print(f"Size of the train set: {len(train_data)}. Size of the validation set: {len(valid_data)}")
 
     chars_per_token = chars_token_ratio(train_data, tokenizer, args.input_column_name, args.output_column_name)
