@@ -192,14 +192,16 @@ class ConstantLengthDataset(IterableDataset):
 
 
 def create_datasets(tokenizer, args):
-    dataset = load_dataset(
-        args.dataset_name,
-        data_dir=args.subset,
-        split=args.split,
-        use_auth_token=True,
-        num_proc=args.num_workers if not args.streaming else None,
-        streaming=args.streaming,
-    )
+    # dataset = load_dataset(
+    #     args.dataset_name,
+    #     data_dir=args.subset,
+    #     split=args.split,
+    #     use_auth_token=True,
+    #     num_proc=args.num_workers if not args.streaming else None,
+    #     streaming=args.streaming,
+    # )
+    import datasets
+    dataset = datasets.DatasetDict.load_from_disk(args.dataset_name)
     if args.streaming:
         print("Loading the dataset in streaming mode")
         valid_data = dataset.take(args.size_valid_set)

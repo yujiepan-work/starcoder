@@ -30,11 +30,13 @@ conda env config vars list
 ## try out finetuning
 ```bash
 export CUDA_VISIBLE_DEVICES=0
+# avoid connections to hf 
 export TRANSFORMERS_OFFLINE=1
-# export HF_DATASETS_OFFLINE=1
+export HF_HUB_DISABLE_TELEMETRY=1
+export HF_DATASETS_OFFLINE=1
 python finetune/finetune_debug.py \
   --model_path="bigcode/starcoderbase-7b" \
-  --dataset_name="enoreyes/success-llm-instructions"\
+  --dataset_name=/mnt/sh_flex_storage/dataset/hf_datasets/enoreyes--success-llm-instructions/ \
   --size_valid_set 10000\
   --seq_length 256 \
   --max_steps 1000\
