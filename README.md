@@ -32,7 +32,7 @@ conda env config vars list
 export CUDA_VISIBLE_DEVICES=0
 export TRANSFORMERS_OFFLINE=1
 # export HF_DATASETS_OFFLINE=1
-python finetune/finetune.py \
+python finetune/finetune_debug.py \
   --model_path="bigcode/starcoderbase-7b" \
   --dataset_name="enoreyes/success-llm-instructions"\
   --size_valid_set 10000\
