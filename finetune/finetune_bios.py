@@ -372,8 +372,8 @@ if __name__ == "__main__":
     set_seed(args.seed)
     os.makedirs(args.output_dir, exist_ok=True)
 
-    # logging.set_verbosity_info()
-    logging.set_verbosity_error()
+    logging.set_verbosity_info()
+    # logging.set_verbosity_error()
     setup_basic_logger()
 
     logger.info('Args:\n%s', pprint.pformat(vars(args), indent=2))
