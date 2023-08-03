@@ -50,3 +50,35 @@ python finetune/finetune_debug.py \
   --weight_decay 0.05\
   --output_dir="./checkpoints" \
 ```
+
+codegen25-7b
+
+```bash
+export CUDA_VISIBLE_DEVICES=0,1
+export TRANSFORMERS_OFFLINE=1
+export HF_HUB_DISABLE_TELEMETRY=1
+export HF_DATASETS_OFFLINE=1
+export WANDB_DISABLED=0
+
+folder=0803_codegen25-7b-multi_naive_chunks
+mkdir ./logs/$folder
+
+torchrun --nproc_per_node=2 finetune/finetune_bios.py \
+  --model_path="Salesforce/codegen25-7b-multi" \
+  --lora_target_modules=codegen-7 \
+  --dataset_name=naive_chunks \
+  --naive_chunks_path=/mnt/sh_flex_storage/home/yujiepan/workspace/bios-llm/starcoder/data/ipsd_data1_by_codegen25.pt \
+  --seq_length 2048 \
+  --batch_size 4 \
+  --gradient_accumulation_steps 1 \
+  --max_steps 4000 \
+  --eval_freq 50 \
+  --save_freq 50 \
+  --log_freq 5 \
+  --learning_rate 5e-5 \
+  --lr_scheduler_type="cosine"\
+  --num_warmup_steps 50 \
+  --weight_decay 0.05\
+  --run_name=$folder \
+  --output_dir="./logs/$folder" 2>&1 | tee ./logs/$folder/std.log
+```
